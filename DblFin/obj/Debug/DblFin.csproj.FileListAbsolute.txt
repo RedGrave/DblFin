@@ -1,0 +1,11 @@
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\DblFin.exe.config
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\DblFin.exe
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\DblFin.pdb
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.csprojResolveAssemblyReference.cache
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.Form1.resources
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.Properties.Resources.resources
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.csproj.GenerateResource.Cache
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.exe
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.pdb
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\LibDblFin.dll
+c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\LibDblFin.pdb

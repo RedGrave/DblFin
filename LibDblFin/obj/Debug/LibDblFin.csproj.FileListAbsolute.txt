@@ -1,0 +1,5 @@
+c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\bin\Debug\LibDblFin.dll
+c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\bin\Debug\LibDblFin.pdb
+c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.csprojResolveAssemblyReference.cache
+c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.dll
+c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.pdb
