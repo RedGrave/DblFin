@@ -17,6 +17,8 @@ namespace LibDblFin
         //  List used to store file and folders
         private List<string> dirList = new List<string>();
         private List<string> fileList = new List<string>();
+        private List<FileInfo> fileInfos = new List<FileInfo>();
+        private List<FileInfo> matchedSizes = new List<FileInfo>();
 
         //  Progress class, to group status
         public class progressArguments : EventArgs
@@ -24,16 +26,15 @@ namespace LibDblFin
             public double scannedFolder {get; set;}
             public double scannedFile { get; set; }
             public int percentageSizeScanned { get; set; }
-            public int percentageMD5Scanned { get; set; }
+            public int possibleDoubles { get; set; }
             public string status {get; set;}
 
             //  Constructor
-            public progressArguments(double scannedFold, double scannedFiles, int percentSizeAnalysis, int percentMD5hash, string strStatus)
+            public progressArguments(double scannedFold, double scannedFiles, int percentSizeAnalysis, int possibleDoubles, string strStatus)
             {
                 this.scannedFolder = scannedFold;
                 this.scannedFile = scannedFiles;
                 this.percentageSizeScanned = percentSizeAnalysis;
-                this.percentageMD5Scanned = percentMD5hash;
                 this.status = strStatus;
             }
 
@@ -88,17 +89,23 @@ namespace LibDblFin
         //  Used to scan every directory and store every file in a list
         public void scanFile()
         {
+
+            int count = 1;
+
             foreach(string s in dirList)
             {
                 try
                 {
                     string[] tmpFile = Directory.GetFiles(s);
                     fileList.AddRange(tmpFile);
+                    int completed = Convert.ToInt32(((double)count / (double)this.dirList.Count()) * 100);
 
                     if (ReportProgress != null)
                     {
-                        ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Scanning Folder..."));
+                        ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), completed, 0, "Scanning File..."));
                     }
+
+                    count++;
                 }
 
                 catch (UnauthorizedAccessException)
@@ -108,16 +115,69 @@ namespace LibDblFin
             }
         }
 
-        //  I don't kn0w if i'll keep this code... seems useless now
-        public double getNumberOfFolder()
+        public void readFiles()
         {
-            return this.dirList.Count();
+            int count = 1;
+            foreach (string s in fileList)
+            {
+                int completed = Convert.ToInt32(((double)count / (double)this.fileList.Count()) * 100);
+
+                fileInfos.Add(new FileInfo(s));
+
+                if (ReportProgress != null)
+                {
+                    ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), completed, 0, "Reading File..."));
+                }
+
+                count++;
+            }
         }
-        public double getNumberOfFile()
+
+        public void compareSize()
         {
-            return this.fileList.Count();
+            ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, matchedSizes.Count(), "Pre-analysis of files to determine possible doubles..."));
+            
+            //  I will have to optimize this part, doubles are analyzed multiple times, because for each element I check the whole array, not only the onw we didn't check.
+            //  Maybe by using stack...
+            foreach (string s in fileList)
+            {
+                int count = 1;
+                int completed = Convert.ToInt32(((double)count / (double)this.fileList.Count()) * 100);
+
+                foreach (FileInfo f in fileInfos)
+                {
+                    bool firstAdd = true;
+                    
+                    foreach (FileInfo fi in fileInfos)
+                    {
+                        if(f.Length == fi.Length)
+                        {
+                            if(firstAdd == true)
+                            {
+                                matchedSizes.Add(f);
+                                firstAdd = false;
+                            }
+                            matchedSizes.Add(fi);
+                        }
+                    }
+
+                    ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), completed, matchedSizes.Count(), "Pre-analysis of files to determine possible doubles..."));
+                    count++;
+                }
+            }
+        }
+
+        public void analyze(string file)
+        {
+            scanDir(file);
+            scanFile();
+            readFiles();
+            compareSize();
+
+            if (ReportProgress != null)
+            {
+                ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, matchedSizes.Count(), "DONE !"));
+            }
         }
     }
-
-
 }

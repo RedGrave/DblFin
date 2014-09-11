@@ -33,13 +33,15 @@
             this.btn_path = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbl_status = new System.Windows.Forms.Label();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.lbl_numberOfFile = new System.Windows.Forms.Label();
+            this.lbl_numberOfFolder = new System.Windows.Forms.Label();
+            this.btn_analyzer = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_analyzer = new System.Windows.Forms.Button();
-            this.lbl_numberOfFolder = new System.Windows.Forms.Label();
-            this.lbl_numberOfFile = new System.Windows.Forms.Label();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.lbl_status = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lbl_doubles = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -72,6 +74,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lbl_doubles);
+            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.lbl_status);
             this.groupBox1.Controls.Add(this.progressBar1);
             this.groupBox1.Controls.Add(this.lbl_numberOfFile);
@@ -85,6 +89,52 @@
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Analysis";
+            // 
+            // lbl_status
+            // 
+            this.lbl_status.AutoSize = true;
+            this.lbl_status.Location = new System.Drawing.Point(6, 161);
+            this.lbl_status.Name = "lbl_status";
+            this.lbl_status.Size = new System.Drawing.Size(10, 13);
+            this.lbl_status.TabIndex = 5;
+            this.lbl_status.Text = ".";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.ForeColor = System.Drawing.Color.Lime;
+            this.progressBar1.Location = new System.Drawing.Point(9, 267);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(426, 23);
+            this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar1.TabIndex = 4;
+            // 
+            // lbl_numberOfFile
+            // 
+            this.lbl_numberOfFile.AutoSize = true;
+            this.lbl_numberOfFile.Location = new System.Drawing.Point(90, 63);
+            this.lbl_numberOfFile.Name = "lbl_numberOfFile";
+            this.lbl_numberOfFile.Size = new System.Drawing.Size(13, 13);
+            this.lbl_numberOfFile.TabIndex = 4;
+            this.lbl_numberOfFile.Text = "0";
+            // 
+            // lbl_numberOfFolder
+            // 
+            this.lbl_numberOfFolder.AutoSize = true;
+            this.lbl_numberOfFolder.Location = new System.Drawing.Point(90, 42);
+            this.lbl_numberOfFolder.Name = "lbl_numberOfFolder";
+            this.lbl_numberOfFolder.Size = new System.Drawing.Size(13, 13);
+            this.lbl_numberOfFolder.TabIndex = 3;
+            this.lbl_numberOfFolder.Text = "0";
+            // 
+            // btn_analyzer
+            // 
+            this.btn_analyzer.Location = new System.Drawing.Point(360, 19);
+            this.btn_analyzer.Name = "btn_analyzer";
+            this.btn_analyzer.Size = new System.Drawing.Size(75, 23);
+            this.btn_analyzer.TabIndex = 2;
+            this.btn_analyzer.Text = "Analyze";
+            this.btn_analyzer.UseVisualStyleBackColor = true;
+            this.btn_analyzer.Click += new System.EventHandler(this.btn_analyzer_Click);
             // 
             // label3
             // 
@@ -104,51 +154,25 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Folder Found : ";
             // 
-            // btn_analyzer
+            // label4
             // 
-            this.btn_analyzer.Location = new System.Drawing.Point(360, 19);
-            this.btn_analyzer.Name = "btn_analyzer";
-            this.btn_analyzer.Size = new System.Drawing.Size(75, 23);
-            this.btn_analyzer.TabIndex = 2;
-            this.btn_analyzer.Text = "Analyze";
-            this.btn_analyzer.UseVisualStyleBackColor = true;
-            this.btn_analyzer.Click += new System.EventHandler(this.btn_analyzer_Click);
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 85);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Doubles :";
             // 
-            // lbl_numberOfFolder
+            // lbl_doubles
             // 
-            this.lbl_numberOfFolder.AutoSize = true;
-            this.lbl_numberOfFolder.Location = new System.Drawing.Point(90, 42);
-            this.lbl_numberOfFolder.Name = "lbl_numberOfFolder";
-            this.lbl_numberOfFolder.Size = new System.Drawing.Size(13, 13);
-            this.lbl_numberOfFolder.TabIndex = 3;
-            this.lbl_numberOfFolder.Text = "0";
+            this.lbl_doubles.AutoSize = true;
+            this.lbl_doubles.Location = new System.Drawing.Point(90, 85);
+            this.lbl_doubles.Name = "lbl_doubles";
+            this.lbl_doubles.Size = new System.Drawing.Size(13, 13);
+            this.lbl_doubles.TabIndex = 7;
+            this.lbl_doubles.Text = "0";
             // 
-            // lbl_numberOfFile
-            // 
-            this.lbl_numberOfFile.AutoSize = true;
-            this.lbl_numberOfFile.Location = new System.Drawing.Point(90, 63);
-            this.lbl_numberOfFile.Name = "lbl_numberOfFile";
-            this.lbl_numberOfFile.Size = new System.Drawing.Size(13, 13);
-            this.lbl_numberOfFile.TabIndex = 4;
-            this.lbl_numberOfFile.Text = "0";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(9, 267);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(426, 23);
-            this.progressBar1.TabIndex = 4;
-            // 
-            // lbl_status
-            // 
-            this.lbl_status.AutoSize = true;
-            this.lbl_status.Location = new System.Drawing.Point(0, 163);
-            this.lbl_status.Name = "lbl_status";
-            this.lbl_status.Size = new System.Drawing.Size(44, 13);
-            this.lbl_status.TabIndex = 5;
-            this.lbl_status.Text = "PONEY";
-            // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -157,7 +181,7 @@
             this.Controls.Add(this.btn_path);
             this.Controls.Add(this.tb_path);
             this.Controls.Add(this.label1);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "DblFin";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -180,6 +204,8 @@
         private System.Windows.Forms.Label lbl_numberOfFile;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lbl_status;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lbl_doubles;
     }
 }
 

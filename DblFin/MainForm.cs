@@ -50,8 +50,6 @@ namespace DblFin
 
             workerAnalyzerDelegate w1 = workerAnalyzer;
             w1.BeginInvoke(path, null, null);
-            
-
         }
 
         #region backgroundworkers
@@ -64,8 +62,7 @@ namespace DblFin
 
                 dff.ReportProgress += new EventHandler<DblFinFinder.progressArguments>(DblFinFinder_ReportProgress);
 
-                dff.scanDir(tb_path.Text.ToString());
-                dff.scanFile();
+                dff.analyze(tb_path.Text.ToString());
             }
 
             MessageBox.Show("FINISHED !");
@@ -82,6 +79,15 @@ namespace DblFin
             lbl_status.Text = e.status;
             lbl_numberOfFile.Text = e.scannedFile.ToString();
             lbl_numberOfFolder.Text = e.scannedFolder.ToString();
+
+            lbl_doubles.Text = e.possibleDoubles.ToString();
+
+            if (e.percentageSizeScanned > 0)
+            {
+                progressBar1.Style = ProgressBarStyle.Continuous;
+                progressBar1.Value = e.percentageSizeScanned;
+            }
+
         }
 
         #endregion
