@@ -1,6 +1,6 @@
 ﻿namespace DblFin
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Variable nécessaire au concepteur.

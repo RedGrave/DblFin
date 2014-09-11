@@ -11,8 +11,14 @@ namespace LibDblFin
 
     public class DblFinFinder
     {
+        // Event used to report progress
         public EventHandler<progressArguments> ReportProgress;
 
+        //  List used to store file and folders
+        private List<string> dirList = new List<string>();
+        private List<string> fileList = new List<string>();
+
+        //  Progress class, to group status
         public class progressArguments : EventArgs
         {
             public double scannedFolder {get; set;}
@@ -21,6 +27,7 @@ namespace LibDblFin
             public int percentageMD5Scanned { get; set; }
             public string status {get; set;}
 
+            //  Constructor
             public progressArguments(double scannedFold, double scannedFiles, int percentSizeAnalysis, int percentMD5hash, string strStatus)
             {
                 this.scannedFolder = scannedFold;
@@ -31,21 +38,23 @@ namespace LibDblFin
             }
         }
 
-        private List<string> dirList = new List<string>();
-        private List<string> fileList = new List<string>();
-
         public DblFinFinder()
         {
 
         }
 
+        //  Used to list every folder and store it in a list
         public void scanDir (string path)
         {
+            //  Clear dirList
+            this.dirList.Clear();
+
             if(Directory.Exists(path))
             {
 
                 try
                 {
+                    //  If someone is listening for progress report, send it
                     if (ReportProgress != null)
                     {
                         ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Scanning Folder..."));
@@ -63,6 +72,7 @@ namespace LibDblFin
                 {
                     
                 }
+
                 if(ReportProgress != null)
                 {
                     ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Folder Scanned"));
@@ -70,8 +80,11 @@ namespace LibDblFin
             }
         }
 
+        //  Used to scan every directory and store every file in a list
         public void scanFile()
         {
+            this.fileList.Clear();
+
             foreach(string s in dirList)
             {
                 try
@@ -87,6 +100,7 @@ namespace LibDblFin
             }
         }
 
+        //  I don't kn0w if i'll keep this code... seems useless now
         public double getNumberOfFolder()
         {
             return this.dirList.Count();

@@ -3,3 +3,8 @@ c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\bin\Deb
 c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.csprojResolveAssemblyReference.cache
 c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.dll
 c:\Users\RedGrave\documents\visual studio 2013\Projects\DblFin\LibDblFin\obj\Debug\LibDblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\LibDblFin\bin\Debug\LibDblFin.dll
+C:\Users\RedGrave\Documents\DblFin\LibDblFin\bin\Debug\LibDblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\LibDblFin\obj\Debug\LibDblFin.csprojResolveAssemblyReference.cache
+C:\Users\RedGrave\Documents\DblFin\LibDblFin\obj\Debug\LibDblFin.dll
+C:\Users\RedGrave\Documents\DblFin\LibDblFin\obj\Debug\LibDblFin.pdb

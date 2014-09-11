@@ -11,20 +11,15 @@ using System.Windows.Forms;
 using System.IO;
 using LibDblFin;
 
-delegate void workerFolderListerDelegate(string path);
-delegate void workerFileListerDelegate(string path);
+delegate void workerAnalyzerDelegate(string path);
 
-public delegate void populateNumberOfFolderDelegate(string number);
-delegate void populateNumberOfFileDelegate(string number);
-delegate void populatePercentageDelegate(string number);
-
-delegate void updateLabel(string labelname, string status);
+public delegate void populateLabelsDelegate(int folderCount, int fileCount, int percentListed, int percentAnalyzed, string status);
 
 namespace DblFin
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -48,7 +43,7 @@ namespace DblFin
         {
             DblFinFinder finder = new DblFinFinder();
 
-            workerFolderListerDelegate w1 = workerFolderLister;
+            workerAnalyzerDelegate w1 = workerAnalyzer;
             w1.BeginInvoke(path, null, null);
 
         }
@@ -56,23 +51,17 @@ namespace DblFin
         #region backgroundworkers
 
 
-        public void workerFolderLister(string path)
+        public void workerAnalyzer(string path)
         {
+            DblFinFinder dff = new DblFinFinder();
             
-            /*
-            DblFinFinder finder = new DblFinFinder();
-            finder.scanDir(path);
-
-            string temp = finder.getNumberOfFolder().ToString();
-
-            this.Invoke(new populateNumberOfFolderDelegate(populateNumberOfFolder), new object[] { temp });
-
-            finder.scanFile();*/
         }
 
         protected void DblFinFinder_ReportProgress(object sender, DblFinFinder.progressArguments e)
         {
-
+            lbl_numberOfFile.Text = e.scannedFile.ToString();
+            lbl_numberOfFolder.Text = e.scannedFolder.ToString();
+            lbl_status.Text = e.status;
         }
 
         void populateNumberOfFolder(string number)

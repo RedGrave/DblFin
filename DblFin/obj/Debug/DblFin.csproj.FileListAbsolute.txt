@@ -9,3 +9,14 @@ c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\
 c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\obj\Debug\DblFin.pdb
 c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\LibDblFin.dll
 c:\users\redgrave\documents\visual studio 2013\Projects\DblFin\DblFin\bin\Debug\LibDblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\DblFin.exe.config
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.exe
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.csprojResolveAssemblyReference.cache
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.MainForm.resources
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.Properties.Resources.resources
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.csproj.GenerateResource.Cache
+C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\DblFin.exe
+C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\DblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\LibDblFin.dll
+C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\LibDblFin.pdb
