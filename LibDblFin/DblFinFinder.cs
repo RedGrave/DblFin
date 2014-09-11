@@ -9,7 +9,7 @@ using System.Threading;
 namespace LibDblFin
 {
 
-    public class DblFinFinder
+    public class DblFinFinder : IDisposable
     {
         // Event used to report progress
         public EventHandler<progressArguments> ReportProgress;
@@ -36,6 +36,7 @@ namespace LibDblFin
                 this.percentageMD5Scanned = percentMD5hash;
                 this.status = strStatus;
             }
+
         }
 
         public DblFinFinder()
@@ -43,12 +44,14 @@ namespace LibDblFin
 
         }
 
+        public void Dispose()
+        {
+
+        }
+
         //  Used to list every folder and store it in a list
         public void scanDir (string path)
         {
-            //  Clear dirList
-            this.dirList.Clear();
-
             if(Directory.Exists(path))
             {
 
@@ -66,6 +69,12 @@ namespace LibDblFin
                     {
                         scanDir(s);
                     }
+
+                    //  If someone is listening for progress report, send it
+                    if (ReportProgress != null)
+                    {
+                        ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Scanning Folder..."));
+                    }
                 }
 
                 catch(UnauthorizedAccessException)
@@ -73,24 +82,23 @@ namespace LibDblFin
                     
                 }
 
-                if(ReportProgress != null)
-                {
-                    ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Folder Scanned"));
-                }
             }
         }
 
         //  Used to scan every directory and store every file in a list
         public void scanFile()
         {
-            this.fileList.Clear();
-
             foreach(string s in dirList)
             {
                 try
                 {
                     string[] tmpFile = Directory.GetFiles(s);
                     fileList.AddRange(tmpFile);
+
+                    if (ReportProgress != null)
+                    {
+                        ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, 0, "Scanning Folder..."));
+                    }
                 }
 
                 catch (UnauthorizedAccessException)

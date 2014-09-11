@@ -7,18 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using System.Windows.Threading;
 using System.Windows.Forms;
 using System.IO;
 using LibDblFin;
 
 delegate void workerAnalyzerDelegate(string path);
 
-public delegate void populateLabelsDelegate(int folderCount, int fileCount, int percentListed, int percentAnalyzed, string status);
+public delegate void populateLabelsDelegate(DblFinFinder.progressArguments pa);
 
 namespace DblFin
 {
     public partial class MainForm : Form
     {
+        //  Declare the DoubleFinder, which will carry every research and treatment
+        DblFinFinder dff = new DblFinFinder();
+        
+
         public MainForm()
         {
             InitializeComponent();
@@ -45,6 +50,7 @@ namespace DblFin
 
             workerAnalyzerDelegate w1 = workerAnalyzer;
             w1.BeginInvoke(path, null, null);
+            
 
         }
 
@@ -53,20 +59,29 @@ namespace DblFin
 
         public void workerAnalyzer(string path)
         {
-            DblFinFinder dff = new DblFinFinder();
+            using (DblFinFinder dff = new DblFinFinder())
+            {
+
+                dff.ReportProgress += new EventHandler<DblFinFinder.progressArguments>(DblFinFinder_ReportProgress);
+
+                dff.scanDir(tb_path.Text.ToString());
+                dff.scanFile();
+            }
+
+            MessageBox.Show("FINISHED !");
             
         }
 
         protected void DblFinFinder_ReportProgress(object sender, DblFinFinder.progressArguments e)
         {
-            lbl_numberOfFile.Text = e.scannedFile.ToString();
-            lbl_numberOfFolder.Text = e.scannedFolder.ToString();
-            lbl_status.Text = e.status;
+            this.Invoke(new populateLabelsDelegate(populateLabels), new object[] { e });
         }
 
-        void populateNumberOfFolder(string number)
+        void populateLabels(DblFinFinder.progressArguments e)
         {
-            lbl_numberOfFolder.Text = number;
+            lbl_status.Text = e.status;
+            lbl_numberOfFile.Text = e.scannedFile.ToString();
+            lbl_numberOfFolder.Text = e.scannedFolder.ToString();
         }
 
         #endregion
