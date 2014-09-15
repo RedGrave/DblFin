@@ -20,3 +20,4 @@ C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\DblFin.exe
 C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\DblFin.pdb
 C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\LibDblFin.dll
 C:\Users\RedGrave\Documents\DblFin\DblFin\bin\Debug\LibDblFin.pdb
+C:\Users\RedGrave\Documents\DblFin\DblFin\obj\Debug\DblFin.report.resources

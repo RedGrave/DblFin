@@ -206,5 +206,10 @@ namespace LibDblFin
                 ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 100, matchedSizes.Count(), "DONE !"));
             }
         }
+
+        public List<FileInfo> getMatchedList()
+        {
+            return this.matchedSizes;
+        }
     }
 }

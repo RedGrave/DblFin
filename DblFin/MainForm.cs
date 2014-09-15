@@ -11,6 +11,7 @@ using System.Windows.Threading;
 using System.Windows.Forms;
 using System.IO;
 using LibDblFin;
+using System.Runtime.Remoting.Messaging;
 
 delegate void workerAnalyzerDelegate(string path);
 
@@ -18,6 +19,7 @@ public delegate void populateLabelsDelegate(DblFinFinder.progressArguments pa);
 
 namespace DblFin
 {
+
     public partial class MainForm : Form
     {
         //  Declare the DoubleFinder, which will carry every research and treatment
@@ -63,10 +65,9 @@ namespace DblFin
                 dff.ReportProgress += new EventHandler<DblFinFinder.progressArguments>(DblFinFinder_ReportProgress);
 
                 dff.analyze(tb_path.Text.ToString());
-            }
 
-            MessageBox.Show("FINISHED !");
-            
+                MessageBox.Show("FINISHED !");
+            }
         }
 
         protected void DblFinFinder_ReportProgress(object sender, DblFinFinder.progressArguments e)
@@ -89,6 +90,10 @@ namespace DblFin
             }
 
         }
+
+        private void displayResult()
+        { 
+}
 
         #endregion
     }
