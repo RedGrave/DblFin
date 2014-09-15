@@ -36,6 +36,7 @@ namespace LibDblFin
                 this.scannedFile = scannedFiles;
                 this.percentageSizeScanned = percentSizeAnalysis;
                 this.status = strStatus;
+                this.possibleDoubles = possibleDoubles;
             }
 
         }
@@ -53,8 +54,10 @@ namespace LibDblFin
         //  Used to list every folder and store it in a list
         public void scanDir (string path)
         {
+
             if(Directory.Exists(path))
             {
+
 
                 try
                 {
@@ -139,36 +142,60 @@ namespace LibDblFin
             
             //  I will have to optimize this part, doubles are analyzed multiple times, because for each element I check the whole array, not only the onw we didn't check.
             //  Maybe by using stack...
-            foreach (string s in fileList)
-            {
-                int count = 1;
-                int completed = Convert.ToInt32(((double)count / (double)this.fileList.Count()) * 100);
 
-                foreach (FileInfo f in fileInfos)
+            int count = 1;
+            int completed = Convert.ToInt32(((double)count / (double)this.fileList.Count()) * 100);
+
+            List<int> doublesIndex = new List<int>();
+
+            for (int i = fileInfos.Count() - 1; i >= 0; i--)
+            {
+                bool firstAdd = true;
+
+                for(int j = i-1; j >= 0; j--)
                 {
-                    bool firstAdd = true;
-                    
-                    foreach (FileInfo fi in fileInfos)
+                    if(fileInfos[i].Length == fileInfos[j].Length && fileInfos[i].FullName != fileInfos[j].FullName)
                     {
-                        if(f.Length == fi.Length)
+                        if(firstAdd == true)
                         {
-                            if(firstAdd == true)
+                            if (!doublesIndex.Contains(i))
                             {
-                                matchedSizes.Add(f);
+                                this.matchedSizes.Add(fileInfos[i]);
                                 firstAdd = false;
+                                doublesIndex.Add(i);
                             }
-                            matchedSizes.Add(fi);
+                        }
+
+                        if(!doublesIndex.Contains(j))
+                        {
+                            this.matchedSizes.Add(fileInfos[j]);
+                            doublesIndex.Add(j);
                         }
                     }
-
-                    ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), completed, matchedSizes.Count(), "Pre-analysis of files to determine possible doubles..."));
-                    count++;
                 }
+
+                ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), completed, this.matchedSizes.Count(), "Pre-analysis of files to determine possible doubles..."));
+                count++;
             }
+
+            using (StreamWriter sw = new StreamWriter("log.txt"))
+            {
+
+                for(int i = 0; i <= matchedSizes.Count()-1;i++)
+                {
+                    sw.WriteLine(i + "\t\t" + doublesIndex[i].ToString() + "\t\t\t\t" + matchedSizes[i].FullName);
+                }
+
+            }
+
         }
 
         public void analyze(string file)
         {
+            if(Directory.Exists(file))
+            {
+                dirList.Add(file);
+            }
             scanDir(file);
             scanFile();
             readFiles();
@@ -176,7 +203,7 @@ namespace LibDblFin
 
             if (ReportProgress != null)
             {
-                ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 0, matchedSizes.Count(), "DONE !"));
+                ReportProgress(this, new progressArguments(this.dirList.Count(), this.fileList.Count(), 100, matchedSizes.Count(), "DONE !"));
             }
         }
     }
