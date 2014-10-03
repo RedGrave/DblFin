@@ -154,7 +154,7 @@ namespace LibDblFin
 
                 for(int j = i-1; j >= 0; j--)
                 {
-                    if(fileInfos[i].Length == fileInfos[j].Length && fileInfos[i].FullName != fileInfos[j].FullName)
+                    if(fileInfos[i].Length == fileInfos[j].Length)
                     {
                         if(firstAdd == true)
                         {
@@ -183,7 +183,7 @@ namespace LibDblFin
 
                 for(int i = 0; i <= matchedSizes.Count()-1;i++)
                 {
-                    sw.WriteLine(i + "\t\t" + doublesIndex[i].ToString() + "\t\t\t\t" + matchedSizes[i].FullName);
+                    sw.WriteLine(i + "\t\t" + doublesIndex[i].ToString() + "\t\t\t\t" + matchedSizes[i].Name + "\t\t\t\t" + matchedSizes[i].Length);
                 }
 
             }
